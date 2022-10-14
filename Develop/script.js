@@ -24,12 +24,15 @@ function generatePassword() {
   var choiceArr = new Array(4);
   //password to return
   var password = "";
+  //arrays to hold character choices
   var letterArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
   "s", "t", "u", "v", "w", "x", "y", "z"];
   var numArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   var charArr = ["!", "?", "#", "%", "*", "$", "&"];
+  //array to hold character choices from selections
   var includeArr = new Array();
 
+//loops if a valid password length has not been chosen
   while (!lengValid){
     let lengStr = prompt('Choose a length between 8 and 128.');
     //check if a number and set string to number or ask for number
@@ -47,8 +50,9 @@ function generatePassword() {
     }
   }
 
+// validation to check if at least 1 character choice has been made. Loops again if not
   while(!choiceValid){
-    alert("You must use at least 1 of character choices.");
+    alert("You must use at least 1 of the character choices" + "\n" + "(numbers, uppercase, lowercase, special)");
     choiceArr[0] = confirm("Include numbers?");
     choiceArr[1] = confirm("Include uppercase letters?");
     choiceArr[2] = confirm("Include lowercase letters?");
@@ -80,14 +84,11 @@ function generatePassword() {
     includeArr = includeArr.concat(charArr);
   }
 
-  //for testing
-  for(var i = 0; i < includeArr.length; i++){
-    console.log(includeArr[i]);
-  }
   //make password string concatonate on randoms til hit password leng
   for(var i = 0; i < leng; i++){
     password += includeArr[(Math.floor(Math.random() * includeArr.length))];
   }
+  //return the completed password
   return password;
 
 }
